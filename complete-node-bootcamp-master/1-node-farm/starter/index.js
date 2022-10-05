@@ -11,7 +11,7 @@ const server = http.createServer((req, res) => {
     if (pathname === '/' || pathname === '/overview') {
         getHomePage(req, res);
     }
-    else if (pathname === '/product') {
+    else if (pathname.includes('/product/')) {
         getProductPage(req, res);
     }
     else {
