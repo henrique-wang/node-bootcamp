@@ -1,0 +1,14 @@
+{
+  "name": "event-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "event.js",
+  "scripts": {
+    "start": "node event.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "slugify": "^1.6.5"
+  }
+}
