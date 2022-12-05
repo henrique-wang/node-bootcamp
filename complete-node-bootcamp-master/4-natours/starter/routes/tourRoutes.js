@@ -3,6 +3,9 @@ const tourController = require('./../controllers/tourController');
 
 const router = express.Router();
 
+// It is implicited that checkTourId params are (req, res, next, val)
+router.param('id', tourController.checkTourId);
+
 router.route('/')
     .get(tourController.getAllTours)
     .post(tourController.createTour);

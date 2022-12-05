@@ -16,16 +16,6 @@ const getTourById = (req, res) => {
     const tourId = req.params.id * 1;
     const tour = tours.find(el => el.id === tourId);
 
-    if (!tour) {
-        return res.status(404).json({
-            status: 'fail',
-            error: {
-                status: 'NOT_FOUND',
-                description: `Tour id:${tourId} not found.`
-            }
-        })
-    }
-
     res.status(200).json({
         status: 'success',
         data: {
@@ -56,17 +46,6 @@ const createTour = (req, res) => {
 };
 
 const updateTour = (req, res) => {
-    const tourId = req.params.id * 1;
-
-    if (tourId > tours.length) {
-        return res.status(404).json({
-            status: 'fail',
-            error: {
-                status: 'NOT_FOUND',
-                description: `Tour id:${tourId} not found.`
-            }
-        });
-    }
 
     res.status(200).json({
         status: 'success',
@@ -93,10 +72,25 @@ const deleteTour = (req, res) => {
     });
 };
 
+const checkTourId = (req, res, next, tourId) => {
+    if (tourId * 1 > tours.length) {
+        console.error(`Tour id:${tourId} not found.`);
+        return res.status(404).json({
+            status: 'fail',
+            error: {
+                status: 'NOT_FOUND',
+                description: `Tour id:${tourId} not found.`
+            }
+        });
+    }
+    next();
+}
+
 module.exports = {
     getAllTours,
     getTourById,
     createTour,
     updateTour,
-    deleteTour
+    deleteTour,
+    checkTourId
 }
