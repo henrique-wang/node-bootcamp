@@ -86,11 +86,27 @@ const checkTourId = (req, res, next, tourId) => {
     next();
 }
 
+const checkRequestBody = (req, res, next) => {
+    const body = req.body;
+    if (!body.name || !body.price) {
+        console.error('Not provided: name or price.');
+        return res.status(400).json({
+            status: 'fail',
+            error: {
+                status: 'INVALID_REQUEST',
+                description: 'Not provided: name or price.'
+            }
+        });
+    }
+    next();
+}
+
 module.exports = {
     getAllTours,
     getTourById,
     createTour,
     updateTour,
     deleteTour,
-    checkTourId
+    checkTourId,
+    checkRequestBody
 }
